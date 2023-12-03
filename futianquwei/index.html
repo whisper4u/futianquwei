@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        #title {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 80px;
+        }
+
+        #QRcode {
+            width: 50%;
+            height: 50%;
+            display: block;
+            margin: auto;
+        }
+
+        #time {
+            font-weight: bold;
+            font-size: 26px;
+            color: #0eb409;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        #welcome {
+            font-size: 16px;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        #address {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        #showQRcode {
+            font-size: 16px;
+            text-align: center;
+            line-height: 50px;
+            font-weight: bold;
+        }
+
+        #useTime {
+            font-size: 14px;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="title">刘先生，您好！欢迎使用访客通行证</div>
+        <div id="time"></div>
+        <img src="/QRcode.png" id="QRcode" />
+        <div id="welcome">欢迎到访区文化广电体育旅游局</div>
+        <div id="address">福田区福民路123号区机关大楼23楼2321室（0755-83089216）</div>
+        <div id="showQRcode">出示二维码，扫码后进入园区大院</div>
+        <div id="useTime">请于{{startDate}} 08:00:00 - {{endDate}} 23:59:00内通行</div>
+    </div>
+
+</body>
+
+<script>
+    function updateTime() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        var date = now.getDate();
+        var month = now.getMonth() + 1;
+        var year = now.getFullYear();
+        
+        // 格式化时间，例如"09:05:12"
+        var formattedTime = ('0' + month).slice(-2) + '-' + ('0' + date).slice(-2) + " " + ('0' + hours).slice(-2) + ':' +
+            ('0' + minutes).slice(-2) + ':' +
+            ('0' + seconds).slice(-2);
+
+        var startTime = ('0' + year).slice(-4) + '-' + ('0' + month).slice(-2) + '-' + ('0' + date).slice(-2)
+        var useTime = "请于 " + startTime + " 08:30:00 - " + startTime + " 23:59:00内通行"
+        // 将时间显示在页面上
+        document.getElementById("time").innerHTML = formattedTime;
+        document.getElementById("useTime").innerHTML = useTime
+    }
+    // 每秒钟更新一次时间显示
+    setInterval(updateTime, 1000);
+
+</script>
+
+</html>
